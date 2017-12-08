@@ -19,9 +19,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         baza = new ArrayList<>();
-        baza.add(new FoodEntry(new Double[]{0.7,0.2,0.1}, true));
+        baza.add(new FoodEntry(new Double[]{0.7,0.2,0.1}, false));
+        baza.add(new FoodEntry(new Double[]{0.8,0.4,0.2}, true));
+        baza.add(new FoodEntry(new Double[]{0.6,0.3,0.3}, false));
 
-        for(int i=0; i<baza.size(); i++){
+        Knn nn = new Knn(baza,1); //3 neighbours
+        Log.d(TAG, "Classified as:  "+nn.classify(new FoodEntry(new Double[]{0.9,0.5,0.3},null)));
+
+
+       /* for(int i=0; i<baza.size(); i++){
 
             Log.d(TAG, "onCreate: kalorie" +baza.get(i).getEatable().toString());
         }
@@ -32,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onCreate name:" + n);
             }
         }
-
+        */
     }
 
     // nasz kod
