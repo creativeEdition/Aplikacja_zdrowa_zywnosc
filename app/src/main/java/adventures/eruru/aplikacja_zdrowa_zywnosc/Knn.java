@@ -43,16 +43,17 @@ public class Knn {
         return Math.sqrt(distance);
     }
 
+    /*
     private static double convertDistance(double d){
         return 1.0/d;
     }
-
+    */
     private FoodEntry[] getNearestNeighbourType(FoodEntry x){
         FoodEntry[] retur = new FoodEntry[this.k];
         double fjernest = Double.MIN_VALUE;
         int index = 0;
         for(FoodEntry tse : this.dataSet){
-            double distance = convertDistance(distance(x,tse));
+            double distance = distance(x,tse);
             if(retur[retur.length-1] == null){
                 int j = 0;
                 while(j < retur.length){
@@ -65,6 +66,7 @@ public class Knn {
                     index = j;
                     fjernest = distance;
                 }
+
             }
             else{
                 if(distance < fjernest){retur[index] = tse;
