@@ -1,6 +1,7 @@
 package adventures.eruru.aplikacja_zdrowa_zywnosc;
 
 import android.content.Intent;
+import android.net.sip.SipSession;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,11 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG= "MainActivity";
     ArrayList<FoodEntry> baza;
+
+    private EditText pole_nazwy;
+    private EditText pole_bialka;
+    private EditText pole_tluszcze;
+    private EditText pole_weglowodany;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,49 +35,78 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Classified as:  "+nn.classify(new FoodEntry(new Double[]{0.9,0.5,0.3},null)));
 
 
-       /* for(int i=0; i<baza.size(); i++){
+        pole_nazwy = (EditText)findViewById(R.id.editText1);
+        pole_bialka = (EditText)findViewById(R.id.editText2);
+        pole_tluszcze = (EditText)findViewById(R.id.editText3);
+        pole_weglowodany = (EditText)findViewById(R.id.editText4);
 
-            Log.d(TAG, "onCreate: kalorie" +baza.get(i).getEatable().toString());
-        }
 
-        for (int i = 0; i < baza.size(); i++){
-            Double[] result = baza.get(i).getIngredients();
-            for (Double n : result) {
-                Log.d(TAG, "onCreate name:" + n);
+        pole_nazwy.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                String tekst_nazwy =pole_nazwy.getText().toString();;
+                Log.d(TAG, "nazwa: " + tekst_nazwy);
             }
-        }
-        */
+        });
+
+        pole_bialka.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                String tekst_bialka =pole_bialka.getText().toString();;
+                Log.d(TAG, "bialka: " + tekst_bialka);
+            }
+        });
+
+        pole_tluszcze.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                String tekst_tluszcze =pole_tluszcze.getText().toString();;
+                Log.d(TAG, "tluszcze: " + tekst_tluszcze);
+            }
+        });
+
+        pole_weglowodany.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                String tekst_weglowodany =pole_weglowodany.getText().toString();;
+                Log.d(TAG, "weglowodany: " + tekst_weglowodany);
+            }
+        });
 
         //metoda konfigurująca buttona
           configureEnterButton();
 
-
-          //NIE DZIAŁAJĄCA ZMODYFIKOWANA METODA
-       // configureEnterButton(savedInstanceState);
     }
 
     // STĄD CZERPAŁAM DWA KODY:
     // https://stackoverflow.com/questions/4531396/get-value-of-a-edit-text-field
     // https://www.youtube.com/watch?v=6RtF_mbHcEc
+    // https://stackoverflow.com/questions/13644510/make-edittext-lose-focus-on-clicking-a-button
+    // https://androiddlaprogramistow.wordpress.com/2013/11/06/pole-tekstowe-czyli-edittext/
 
 
 
 
-    // TA METODA UMOZLIWIA OTWARCIE DRUGIEGO OKIENKA, NIE POBIERA JESZCZE DANYCH Z editText
-
-    private EditText pole_nazwy;
-    private EditText pole_bialka;
-    private EditText pole_tluszcze;
-    private EditText pole_weglowodany;
+    // TA METODA UMOZLIWIA OTWARCIE DRUGIEGO OKIENKA, pobiera dane z editText
 
     private void configureEnterButton(){
 
+
+
         Button enterButton = (Button) findViewById(R.id.enterButton);
+
+
 
         enterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                //poniższa linijka jest potrzebna aby ostatni editText, zgubił dotknięcie, bo tylko wtedy wynik bedzie zapisany w zmiennej gdy nie bedzie juz edycji pola
+                v.requestFocusFromTouch();
                 startActivity(new Intent(MainActivity.this, AnswerActivity.class));
 
             }
@@ -80,50 +115,5 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-    /* NIE DZIAŁAJĄCA JESZCZE METODA POBIERAJĄCA DANE Z editText, dużo dużo do poprawki!!
-
-    private void configureEnterButton(Bundle savedInstanceState){
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Button enterButton = (Button) findViewById(R.id.enterButton);
-
-        final EditText  edit_text_nazwa   = (EditText)findViewById(R.id.editText1);
-        final EditText edit_text_bialka   = (EditText)findViewById(R.id.editText2);
-        final EditText edit_text_tluszcze   = (EditText)findViewById(R.id.editText3);
-        final EditText edit_text_weglowodany   = (EditText)findViewById(R.id.editText4);
-
-
-        enterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Log.v("EditText value=", edit_text_nazwa.getText().toString());
-                Log.v("EditText value=", edit_text_bialka.getText().toString());
-                Log.v("EditText value=", edit_text_tluszcze.getText().toString());
-                Log.v("EditText value=", edit_text_weglowodany.getText().toString());
-
-                startActivity(new Intent(MainActivity.this, AnswerActivity.class));
-
-            }
-        });
-
-
-
-    }
-
-   */
-
-
-
-
-
-
-
-
-
 
 }
