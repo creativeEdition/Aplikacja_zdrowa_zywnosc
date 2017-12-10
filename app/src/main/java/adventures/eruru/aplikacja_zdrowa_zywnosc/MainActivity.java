@@ -1,10 +1,12 @@
 package adventures.eruru.aplikacja_zdrowa_zywnosc;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-
+import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 
@@ -39,15 +41,81 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         */
+
+        //metoda konfigurująca buttona
+          configureEnterButton();
+
+
+          //NIE DZIAŁAJĄCA ZMODYFIKOWANA METODA
+       // configureEnterButton(savedInstanceState);
     }
 
-    // nasz kod
+    // STĄD CZERPAŁAM DWA KODY:
+    // https://stackoverflow.com/questions/4531396/get-value-of-a-edit-text-field
+    // https://www.youtube.com/watch?v=6RtF_mbHcEc
 
-    public void onNextClick (View view){
 
-        //działanie buttona
+
+
+    // TA METODA UMOZLIWIA OTWARCIE DRUGIEGO OKIENKA, NIE POBIERA JESZCZE DANYCH Z editText
+
+
+    private void configureEnterButton(){
+
+        Button enterButton = (Button) findViewById(R.id.enterButton);
+
+        enterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(MainActivity.this, AnswerActivity.class));
+
+            }
+        });
+
+
 
     }
+
+
+    /* NIE DZIAŁAJĄCA JESZCZE METODA POBIERAJĄCA DANE Z editText, dużo dużo do poprawki!!
+
+    private void configureEnterButton(Bundle savedInstanceState){
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Button enterButton = (Button) findViewById(R.id.enterButton);
+
+        final EditText  edit_text_nazwa   = (EditText)findViewById(R.id.editText1);
+        final EditText edit_text_bialka   = (EditText)findViewById(R.id.editText2);
+        final EditText edit_text_tluszcze   = (EditText)findViewById(R.id.editText3);
+        final EditText edit_text_weglowodany   = (EditText)findViewById(R.id.editText4);
+
+
+        enterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.v("EditText value=", edit_text_nazwa.getText().toString());
+                Log.v("EditText value=", edit_text_bialka.getText().toString());
+                Log.v("EditText value=", edit_text_tluszcze.getText().toString());
+                Log.v("EditText value=", edit_text_weglowodany.getText().toString());
+
+                startActivity(new Intent(MainActivity.this, AnswerActivity.class));
+
+            }
+        });
+
+
+
+    }
+
+   */
+
+
+
+
 
 
 
