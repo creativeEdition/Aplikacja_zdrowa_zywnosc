@@ -8,11 +8,16 @@
         android:layout_height="wrap_content">
 
 
-        <TextView
+        <EditText
+            android:id="@+id/answer_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TU BEDZIE ODPOWIEDZ RZUCONA"
+            android:text=""
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
 
             />
 

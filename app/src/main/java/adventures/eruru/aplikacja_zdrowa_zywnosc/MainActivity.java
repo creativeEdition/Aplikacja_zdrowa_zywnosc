@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
 
     // TA METODA UMOZLIWIA OTWARCIE DRUGIEGO OKIENKA, NIE POBIERA JESZCZE DANYCH Z editText
 
+    private EditText pole_nazwy;
+    private EditText pole_bialka;
+    private EditText pole_tluszcze;
+    private EditText pole_weglowodany;
 
     private void configureEnterButton(){
 
