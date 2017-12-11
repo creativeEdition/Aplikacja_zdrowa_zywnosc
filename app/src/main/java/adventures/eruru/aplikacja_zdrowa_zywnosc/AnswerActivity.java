@@ -12,8 +12,8 @@ public class AnswerActivity extends AppCompatActivity {
 
     private EditText field_answer;
 
-    private String answer_true = " Produkt niskokaloryczny! Możesz spożywać w większych ilościach! Pamiętaj dzienne zapotrzebowanie kaloryczne dla kobiet to 2 000, dla mężczyzn 2 500.";
-    private String answer_false = " Produkt wysokokaloryczny! Jedz w mniejszych ilościach! Pamiętaj dzienne zapotrzebowanie kaloryczne dla kobiet to 2 000, dla mężczyzn 2 500.";
+    private String answer_true = " Produkt niskokaloryczny! Możesz spożywać w większych ilościach! Pamiętaj dzienne zapotrzebowanie kaloryczne dla kobiet to 2 000 kcal, dla mężczyzn 2 500 kcal.";
+    private String answer_false = " Produkt wysokokaloryczny! Jedz w mniejszych ilościach! Pamiętaj dzienne zapotrzebowanie kaloryczne dla kobiet to 2 000 kcal, dla mężczyzn 2 500 kcal.";
 
 
     @Override

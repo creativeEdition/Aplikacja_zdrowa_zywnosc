@@ -3,26 +3,24 @@ package adventures.eruru.aplikacja_zdrowa_zywnosc;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Eruru on 04.12.2017.
- */
+
 
 public class Knn {
 
-    private int k;
     private ArrayList<Boolean> classes;
-    private ArrayList<FoodEntry> dataSet;
+    private ArrayList<FoodEntry> dataFood;
+    private int k;
 
     // dataSet - lista produktow
     // k - liczba sasiadow, w algorytmie przyjeto 1
 
-    public Knn(ArrayList<FoodEntry> dataSet, int k) {
+    public Knn(ArrayList<FoodEntry> dataFood, int k) {
         this.classes = new ArrayList<Boolean>();
-        this.dataSet = dataSet;
+        this.dataFood = dataFood;
         this.k = k;
 
         //wczytanie klas decyzyjnych
-        for (FoodEntry entry : dataSet) {
+        for (FoodEntry entry : dataFood) {
             if (!classes.contains(entry.getEatable())) classes.add(entry.getEatable());
         }
     }
@@ -42,71 +40,70 @@ public class Knn {
         return Math.abs(distance);
     }
 
-    private FoodEntry[] getNearestNeighbourType(FoodEntry element) {
-        FoodEntry[] retur = new FoodEntry[this.k];
-        double fjernest = Double.MIN_VALUE;
+    private FoodEntry[] findNeighbourType(FoodEntry element) {
+        FoodEntry[] effect = new FoodEntry[this.k];
+        double minValue = Double.MIN_VALUE; //najmniejsza, dodatnia, niezerowa wartości typu Double
         int index = 0;
-        for (FoodEntry tse : this.dataSet) {
-            double distance = distance(element, tse);
-            if (retur[retur.length - 1] == null) {
+        for (FoodEntry x : this.dataFood) {
+            double pathway = distance(element, x);
+            if (effect[effect.length - 1] == null) {
                 int j = 0;
-                while (j < retur.length) {
-                    if (retur[j] == null) {
-                        retur[j] = tse;
+                while (j < effect.length) {
+                    if (effect[j] == null) {
+                        effect[j] = x;
                         break;
                     }
                     j++;
                 }
-                if (distance > fjernest) {
+                if (pathway > minValue) {
                     index = j;
-                    fjernest = distance;
+                    minValue = pathway;
                 }
 
             } else {
-                if (distance < fjernest) {
-                    retur[index] = tse;
+                if (pathway < minValue) {
+                    effect[index] = x;
                     double f = 0.0;
                     int ind = 0;
-                    for (int j = 0; j < retur.length; j++) {
-                        double dt = distance(retur[j], element);
+                    for (int j = 0; j < effect.length; j++) {
+                        double dt = distance(effect[j], element);
                         if (dt > f) {
                             f = dt;
                             ind = j;
                         }
                     }
-                    fjernest = f;
+                    minValue = f;
                     index = ind;
                 }
             }
         }
-        return retur;
+        return effect;
     }
 
+    // e element, ktory ma zostac sklasyfikowany
+    // zwraca klase najblizszego sasiada
 
-     // e element, ktory ma zostac sklasyfikowany
-     // zwraca klase najblizszego sasiada
-
-    public Boolean classify(FoodEntry e) {
-        HashMap<Boolean, Double> classcount = new HashMap<>();
-        FoodEntry[] de = this.getNearestNeighbourType(e);
-        for (int i = 0; i < de.length; i++) {
-            double distance = Knn.distance(de[i], e);
-            if (!classcount.containsKey(de[i].getEatable())) {
-                classcount.put(de[i].getEatable(), distance);
+    public Boolean classify(FoodEntry entry) {
+        HashMap<Boolean, Double> classdecision = new HashMap<>();
+        FoodEntry[] tabEntry = this.findNeighbourType(entry);
+        for (int i = 0; i < tabEntry.length; i++) {
+            double distance = Knn.distance(tabEntry[i], entry);
+            if (!classdecision.containsKey(tabEntry[i].getEatable())) {
+                classdecision.put(tabEntry[i].getEatable(), distance);
             } else {
-                classcount.put(de[i].getEatable(),
-                        classcount.get(de[i].getEatable()) + distance);
+                classdecision.put(tabEntry[i].getEatable(),
+                        classdecision.get(tabEntry[i].getEatable()) + distance);
             }
         }
         //szukanie odpowiedniej decyzji
-        Boolean o = null;
+        Boolean result = null;
         double max = 0;
-        for (Boolean ob : classcount.keySet()) {
-            if (classcount.get(ob) >= max) {
-                max = classcount.get(ob);
-                o = ob;
+        for (Boolean dec : classdecision.keySet()) {
+            if (classdecision.get(dec) >= max) {
+                max = classdecision.get(dec);
+                result = dec;
             }
         }
-        return o;
+        return result;
     }
 }

@@ -55,15 +55,11 @@ public class MainActivity extends AppCompatActivity {
         baza.add(new FoodEntry(new Double[]{0.3, 12.0, 40.0}, true));
         baza.add(new FoodEntry(new Double[]{29.6, 7.3, 0.2}, true));
 
-        //Knn nn = new Knn(baza,1); //3 neighbours
-        // Log.d(TAG, "Classified as:  "+nn.classify(new FoodEntry(new Double[]{0.9,0.5,0.3},null)));
-
 
         field_name = (EditText) findViewById(R.id.editText1);
         field_protein = (EditText) findViewById(R.id.editText2);
         field_fat = (EditText) findViewById(R.id.editText3);
         field_sugar = (EditText) findViewById(R.id.editText4);
-
 
         field_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
@@ -105,23 +101,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         //wywolanie metody konfigurująca buttona
         configureEnterButton();
 
     }
 
     // TA METODA UMOZLIWIA OTWARCIE DRUGIEGO OKIENKA, pobiera dane z editText
-
     public void configureEnterButton() {
 
         Button enterButton = (Button) findViewById(R.id.enterButton);
 
-
         enterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 //poniższa linijka jest potrzebna aby ostatni editText, zgubił dotknięcie, bo tylko wtedy wynik bedzie zapisany w zmiennej gdy nie bedzie juz edycji pola
                 v.requestFocusFromTouch();
@@ -130,17 +122,11 @@ public class MainActivity extends AppCompatActivity {
                 double b = Double.parseDouble(text_fat);
                 double c = Double.parseDouble(text_sugar);
 
-                /*double a = tekst_bialka;
-                double b = tekst_tluszcze;
-                double c = tekst_weglowodany;*/
-                Knn nn = new Knn(baza, 1);
-                decision = nn.classify(new FoodEntry(new Double[]{a, b, c}, null));
+                Knn checkFood = new Knn(baza, 1);
+                decision = checkFood.classify(new FoodEntry(new Double[]{a, b, c}, null));
 
                 Log.d(TAG, "Classified as:  " + decision);
             }
         });
-
-
     }
-
 }
