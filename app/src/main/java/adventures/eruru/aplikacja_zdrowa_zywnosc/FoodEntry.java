@@ -8,21 +8,18 @@ import java.util.List;
  */
 
 
-
 public class FoodEntry {
-
 
 
     Double[] ingredients;
     Boolean eatable;
 
-    public FoodEntry(Double[] ingredients, Boolean eatable){
+    public FoodEntry(Double[] ingredients, Boolean eatable) {
 
         this.ingredients = ingredients;
         this.eatable = eatable;
 
     }
-
 
     public Double[] getIngredients() {
 

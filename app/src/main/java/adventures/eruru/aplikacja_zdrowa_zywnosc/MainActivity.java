@@ -13,13 +13,20 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG= "MainActivity";
+    private static final String TAG = "MainActivity";
     ArrayList<FoodEntry> baza;
 
-    private EditText pole_nazwy;
-    private EditText pole_bialka;
-    private EditText pole_tluszcze;
-    private EditText pole_weglowodany;
+    private EditText field_name;
+    private EditText field_protein;
+    private EditText field_fat;
+    private EditText field_sugar;
+
+    String text_protein;
+    String text_fat;
+    String text_sugar;
+
+    static Boolean decision;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,91 +34,111 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         baza = new ArrayList<>();
-        baza.add(new FoodEntry(new Double[]{0.7,0.2,0.1}, false));
-        baza.add(new FoodEntry(new Double[]{0.8,0.4,0.2}, true));
-        baza.add(new FoodEntry(new Double[]{0.6,0.3,0.3}, false));
 
-        Knn nn = new Knn(baza,1); //3 neighbours
-        Log.d(TAG, "Classified as:  "+nn.classify(new FoodEntry(new Double[]{0.9,0.5,0.3},null)));
+        //wysokokaloryczne
+        // baza.add(new FoodEntry(new Double[]{}, false));
+        baza.add(new FoodEntry(new Double[]{25.8, 17.9, 0.7}, false));
+        baza.add(new FoodEntry(new Double[]{18.0, 29.0, 1.6}, false));
+        baza.add(new FoodEntry(new Double[]{12.0, 25.0, 2.0}, false));
+        baza.add(new FoodEntry(new Double[]{12.7, 47.3, 3.8}, false));
+        baza.add(new FoodEntry(new Double[]{23.8, 60.2, 2.5}, false));
+        baza.add(new FoodEntry(new Double[]{8.6, 75.1, 9.0}, false));
+        baza.add(new FoodEntry(new Double[]{11.0, 44.0, 41.0}, false));
+
+        //niskokaloryczne
+        //baza.add(new FoodEntry(new Double[]{}, true));
+        baza.add(new FoodEntry(new Double[]{16.8, 8.0, 0.5}, true));
+        baza.add(new FoodEntry(new Double[]{11.4, 10.2, 0.9}, true));
+        baza.add(new FoodEntry(new Double[]{10.0, 17.0, 1.6}, true));
+        baza.add(new FoodEntry(new Double[]{1.9, 2.2, 1.1}, true));
+        baza.add(new FoodEntry(new Double[]{0.6, 6.2, 0.1}, true));
+        baza.add(new FoodEntry(new Double[]{0.3, 12.0, 40.0}, true));
+        baza.add(new FoodEntry(new Double[]{29.6, 7.3, 0.2}, true));
+
+        //Knn nn = new Knn(baza,1); //3 neighbours
+        // Log.d(TAG, "Classified as:  "+nn.classify(new FoodEntry(new Double[]{0.9,0.5,0.3},null)));
 
 
-        pole_nazwy = (EditText)findViewById(R.id.editText1);
-        pole_bialka = (EditText)findViewById(R.id.editText2);
-        pole_tluszcze = (EditText)findViewById(R.id.editText3);
-        pole_weglowodany = (EditText)findViewById(R.id.editText4);
+        field_name = (EditText) findViewById(R.id.editText1);
+        field_protein = (EditText) findViewById(R.id.editText2);
+        field_fat = (EditText) findViewById(R.id.editText3);
+        field_sugar = (EditText) findViewById(R.id.editText4);
 
 
-        pole_nazwy.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                String tekst_nazwy =pole_nazwy.getText().toString();;
-                Log.d(TAG, "nazwa: " + tekst_nazwy);
-            }
-        });
-
-        pole_bialka.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                String tekst_bialka =pole_bialka.getText().toString();;
-                Log.d(TAG, "bialka: " + tekst_bialka);
-            }
-        });
-
-        pole_tluszcze.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                String tekst_tluszcze =pole_tluszcze.getText().toString();;
-                Log.d(TAG, "tluszcze: " + tekst_tluszcze);
-            }
-        });
-
-        pole_weglowodany.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        field_name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                String tekst_weglowodany =pole_weglowodany.getText().toString();;
-                Log.d(TAG, "weglowodany: " + tekst_weglowodany);
+                String text_name = field_name.getText().toString();
+                ;
+                Log.d(TAG, "nazwa: " + text_name);
             }
         });
 
-        //metoda konfigurująca buttona
-          configureEnterButton();
+        field_protein.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                text_protein = field_protein.getText().toString();
+                ;
+                Log.d(TAG, "bialka: " + text_protein);
+            }
+        });
+
+        field_fat.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                text_fat = field_fat.getText().toString();
+                ;
+                Log.d(TAG, "tluszcze: " + text_fat);
+            }
+        });
+
+        field_sugar.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                text_sugar = field_sugar.getText().toString();
+                ;
+                Log.d(TAG, "weglowodany: " + text_sugar);
+            }
+        });
+
+
+        //wywolanie metody konfigurująca buttona
+        configureEnterButton();
 
     }
 
-    // STĄD CZERPAŁAM DWA KODY:
-    // https://stackoverflow.com/questions/4531396/get-value-of-a-edit-text-field
-    // https://www.youtube.com/watch?v=6RtF_mbHcEc
-    // https://stackoverflow.com/questions/13644510/make-edittext-lose-focus-on-clicking-a-button
-    // https://androiddlaprogramistow.wordpress.com/2013/11/06/pole-tekstowe-czyli-edittext/
-
-
-
-
     // TA METODA UMOZLIWIA OTWARCIE DRUGIEGO OKIENKA, pobiera dane z editText
 
-    private void configureEnterButton(){
-
-
+    public void configureEnterButton() {
 
         Button enterButton = (Button) findViewById(R.id.enterButton);
-
 
 
         enterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+
                 //poniższa linijka jest potrzebna aby ostatni editText, zgubił dotknięcie, bo tylko wtedy wynik bedzie zapisany w zmiennej gdy nie bedzie juz edycji pola
                 v.requestFocusFromTouch();
                 startActivity(new Intent(MainActivity.this, AnswerActivity.class));
+                double a = Double.parseDouble(text_protein);
+                double b = Double.parseDouble(text_fat);
+                double c = Double.parseDouble(text_sugar);
 
+                /*double a = tekst_bialka;
+                double b = tekst_tluszcze;
+                double c = tekst_weglowodany;*/
+                Knn nn = new Knn(baza, 1);
+                decision = nn.classify(new FoodEntry(new Double[]{a, b, c}, null));
+
+                Log.d(TAG, "Classified as:  " + decision);
             }
         });
-
 
 
     }
