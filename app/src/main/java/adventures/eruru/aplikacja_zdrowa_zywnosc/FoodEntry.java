@@ -1,10 +1,5 @@
 package adventures.eruru.aplikacja_zdrowa_zywnosc;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
-
 
 public class FoodEntry {
 

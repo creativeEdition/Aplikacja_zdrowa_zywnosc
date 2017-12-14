@@ -44,6 +44,19 @@ public class MainActivity extends AppCompatActivity {
         baza.add(new FoodEntry(new Double[]{23.8, 60.2, 2.5}, false));
         baza.add(new FoodEntry(new Double[]{8.6, 75.1, 9.0}, false));
         baza.add(new FoodEntry(new Double[]{11.0, 44.0, 41.0}, false));
+        baza.add(new FoodEntry(new Double[]{20.5, 53.5, 0.0}, false));
+        baza.add(new FoodEntry(new Double[]{2.0, 30.0, 0.0}, false));
+        baza.add(new FoodEntry(new Double[]{0.6, 82.5, 0.0}, false));
+        baza.add(new FoodEntry(new Double[]{0.0, 99.0, 0.0}, false));
+        baza.add(new FoodEntry(new Double[]{12.0, 0.0, 74.6}, false));
+        baza.add(new FoodEntry(new Double[]{6.6, 0.0, 60.0}, false));
+        baza.add(new FoodEntry(new Double[]{6.7, 0.0, 78.9}, false));
+        baza.add(new FoodEntry(new Double[]{23.6, 20.2, 45.7}, false));
+        baza.add(new FoodEntry(new Double[]{24.4, 43.8, 18.6}, false));
+        baza.add(new FoodEntry(new Double[]{6.0, 40.0, 51.0}, false));
+        baza.add(new FoodEntry(new Double[]{5.6, 63.2, 5.9}, false));
+        baza.add(new FoodEntry(new Double[]{9.8, 0.0, 72.8}, false));
+        baza.add(new FoodEntry(new Double[]{0.0, 0.0, 5.0}, false));
 
         //niskokaloryczne
         //baza.add(new FoodEntry(new Double[]{}, true));
@@ -54,6 +67,19 @@ public class MainActivity extends AppCompatActivity {
         baza.add(new FoodEntry(new Double[]{0.6, 6.2, 0.1}, true));
         baza.add(new FoodEntry(new Double[]{0.3, 12.0, 40.0}, true));
         baza.add(new FoodEntry(new Double[]{29.6, 7.3, 0.2}, true));
+        baza.add(new FoodEntry(new Double[]{16.5, 0.3, 0.0}, true));
+        baza.add(new FoodEntry(new Double[]{21.2, 1.2, 0.0}, true));
+        baza.add(new FoodEntry(new Double[]{8.8, 5.8, 0.0}, true));
+        baza.add(new FoodEntry(new Double[]{12.7, 8.7, 0.0}, true));
+        baza.add(new FoodEntry(new Double[]{2.6, 0.0, 3.5}, true));
+        baza.add(new FoodEntry(new Double[]{1.3, 0.0, 2.7}, true));
+        baza.add(new FoodEntry(new Double[]{0.7, 0.0, 1.9}, true));
+        baza.add(new FoodEntry(new Double[]{1.1, 0.0, 3.4}, true));
+        baza.add(new FoodEntry(new Double[]{0.8, 0.0, 4.8}, true));
+        baza.add(new FoodEntry(new Double[]{0.7, 0.0, 5.4}, true));
+        baza.add(new FoodEntry(new Double[]{1.2, 0.0, 6.1}, true));
+        baza.add(new FoodEntry(new Double[]{0.9, 0.0, 5.6}, true));
+        baza.add(new FoodEntry(new Double[]{1.1, 0.0, 19.2}, true));
 
 
         field_name = (EditText) findViewById(R.id.editText1);
